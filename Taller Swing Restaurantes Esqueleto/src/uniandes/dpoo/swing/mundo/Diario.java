@@ -46,4 +46,8 @@ public class Diario
     {
         this.restaurantes.add( restaurante );
     }
+
+	public List<Restaurante> getRestaurantes() {
+		return this.restaurantes;
+	}
 }

@@ -1,10 +1,12 @@
 package uniandes.dpoo.swing.interfaz.principal;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -91,5 +93,23 @@ public class PanelLista extends JPanel implements ListSelectionListener
     {
         listaDeRestaurantes.setSelectedValue( restaurante, true );
     }
+
+	public void actualizarLista(List<Restaurante> restaurantes) {
+		 this.removeAll();
+
+		    // Usa un layout adecuado para organizar los elementos
+		    setLayout(new GridLayout(restaurantes.size(), 1, 5, 5)); // Una fila por restaurante, con un espaciado de 5 px
+
+		    // Añade una etiqueta para cada restaurante en la lista
+		    for (Restaurante restaurante : restaurantes) {
+		        JLabel etiqueta = new JLabel(restaurante.getNombre() + " - Calificación: " + restaurante.getCalificacion());
+		        this.add(etiqueta);
+		    }
+
+		    // Refresca el panel para que los cambios sean visibles
+		    revalidate();
+		    repaint();
+		
+	}
 
 }
