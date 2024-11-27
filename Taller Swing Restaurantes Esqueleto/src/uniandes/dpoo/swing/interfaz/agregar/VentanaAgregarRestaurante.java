@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import uniandes.dpoo.swing.interfaz.principal.PanelDetallesRestaurante;
 import uniandes.dpoo.swing.interfaz.principal.VentanaPrincipal;
 
 @SuppressWarnings("serial")
@@ -33,27 +32,25 @@ public class VentanaAgregarRestaurante extends JFrame
 
     public VentanaAgregarRestaurante( VentanaPrincipal principal )
     {
-        this.setVentanaPrincipal(principal);
+        this.ventanaPrincipal=principal;
         setLayout( new BorderLayout( ) );
 
-        // Agrega el panel donde va a estar el mapa
-        PanelMapaAgregar panelMapa = new PanelMapaAgregar();
+        panelDetalles = new PanelEditarRestaurante();
+        panelBotones = new PanelBotonesAgregar(this);
+        panelMapa = new PanelMapaAgregar();
+        
         add(panelMapa, BorderLayout.CENTER);
-
-        // Agrega en el sur un panel para los detalles del restaurante y para los botones
-        JPanel panelSur = new JPanel(new BorderLayout());
-        PanelDetallesRestaurante panelDetalles = new PanelDetallesRestaurante();
-        PanelBotonesAgregar panelBotones = new PanelBotonesAgregar(this);
-
-        panelSur.add(panelDetalles, BorderLayout.CENTER); // Panel con detalles del restaurante
-        panelSur.add(panelBotones, BorderLayout.SOUTH);   // Panel con los botones de acción
-
-        add(panelSur, BorderLayout.SOUTH);
-        // Termina de configurar la ventana
+        
+        JPanel South = new JPanel();
+        South.setLayout(new BorderLayout());
+        South.add(panelDetalles, BorderLayout.CENTER);
+        South.add(panelBotones, BorderLayout.SOUTH);
+        add(South, BorderLayout.SOUTH);
+        
         pack( );
-        setLocationRelativeTo( null );
-        setDefaultCloseOperation( DISPOSE_ON_CLOSE );
-        setResizable( false );
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
     }
 
     /**
@@ -61,11 +58,16 @@ public class VentanaAgregarRestaurante extends JFrame
      */
     public void agregarRestaurante( )
     {
+    	int[] coordenadas = panelMapa.getCoordenadas();
+    	int coordenadasx = coordenadas[0];
+    	int coordenadasy= coordenadas[1];
+    	
     	String labNombre = panelDetalles.getNombre();
         int labCalificacion = panelDetalles.getCalificacion();
         boolean chkVisitado = panelDetalles.getVisitado();
         
-        ventanaPrincipal.agregarRestaurante(labNombre, labCalificacion, chkVisitado);
+        ventanaPrincipal.agregarRestaurante(labNombre, labCalificacion, coordenadasx, coordenadasy, chkVisitado);
+        cerrarVentana();
     }
 
     /**

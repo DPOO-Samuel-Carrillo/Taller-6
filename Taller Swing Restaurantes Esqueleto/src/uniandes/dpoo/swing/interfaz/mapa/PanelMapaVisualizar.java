@@ -39,14 +39,10 @@ public class PanelMapaVisualizar extends JPanel
         super.paint( g );
         Graphics2D g2d = ( Graphics2D )g;
 
-        for (Restaurante restaurante : restaurantes) {
-            int x = restaurante.getX();
-            int y = restaurante.getY();
-            String nombre = restaurante.getNombre();
 
-            g2d.drawString(nombre, x, y);
+            g2d.drawImage(((ImageIcon)labMapa.getIcon()).getImage(), 0,0, this);
         }
-    }
+    
 
     /**
      * Actualiza la lista de restaurantes y llama al método repaint() para que se actualice el mapa

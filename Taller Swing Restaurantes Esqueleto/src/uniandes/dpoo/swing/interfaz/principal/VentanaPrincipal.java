@@ -86,12 +86,11 @@ public class VentanaPrincipal extends JFrame
      */
     public void mostrarVentanaMapa( )
     {
-    	if (ventanaMapa == null) {
-            List<Restaurante> restaurantes = mundo.getRestaurantes(); // Obtiene la lista de restaurantes del diario
-            ventanaMapa = new VentanaMapa(this, restaurantes);
-        }
-        // Hace visible la ventana del mapa
-        ventanaMapa.setVisible(true);
+    	if (ventanaMapa == null || !ventanaMapa.isVisible()) {
+    	
+    		ventanaMapa = new VentanaMapa(this, mundo.getRestaurantes(true));
+    		ventanaMapa.setVisible(true);
+    	}
     }
 
     /**
@@ -100,16 +99,12 @@ public class VentanaPrincipal extends JFrame
      * @param calificacion La calificación del nuevo restaurante
      * @param visitado Indica si el nuevo restaurante ya fue visitado o no
      */
-    public void agregarRestaurante( String nombre, int calificacion, boolean visitado )
+    public void agregarRestaurante( String nombre, int calificacion, int x, int y, boolean visitado )
     {
-    	Restaurante nuevoRestaurante = new Restaurante(nombre, calificacion, visitado);
+    	Restaurante nuevoRestaurante = new Restaurante(nombre, calificacion, x, y, visitado);
         mundo.agregarRestaurante(nuevoRestaurante);
 
-        // Actualiza la lista de restaurantes en el panel
-        pLista.actualizarLista(mundo.getRestaurantes());
-
-        // Actualiza los detalles del restaurante recién agregado
-        pDetalles.actualizarRestaurante(nuevoRestaurante);
+        actualizarRestaurantes();
     }
 
     /**
@@ -130,7 +125,12 @@ public class VentanaPrincipal extends JFrame
     private void actualizarRestaurantes( )
     {
         List<Restaurante> todos = this.mundo.getRestaurantes( true );
-        // TODO completar actualizarRestaurantes
+        pLista.actualizarLista(todos);
+        if (!todos.isEmpty()) {
+            
+        	cambiarRestauranteSeleccionado(todos.get(0));
+        	
+        }
     }
 
     /**

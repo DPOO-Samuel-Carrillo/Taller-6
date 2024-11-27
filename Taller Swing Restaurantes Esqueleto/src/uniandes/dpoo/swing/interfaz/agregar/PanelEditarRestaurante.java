@@ -74,15 +74,9 @@ public class PanelEditarRestaurante extends JPanel
      */
     public String getNombre( )
     {
-    	return txtNombre.getText().trim();
+    	return txtNombre.getText();
     }
 
-	public JTextField getTxtNombre() {
-		return txtNombre;
-	}
 
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
-	}
 
 }

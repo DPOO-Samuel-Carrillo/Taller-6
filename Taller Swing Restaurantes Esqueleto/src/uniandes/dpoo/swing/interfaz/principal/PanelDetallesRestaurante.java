@@ -29,22 +29,19 @@ public class PanelDetallesRestaurante extends JPanel
 
     public PanelDetallesRestaurante( )
     {
-    	setLayout(new GridLayout(3, 2, 5, 5)); // 3 filas, 2 columnas, con espaciado de 5 px
+    	setLayout(new GridLayout(3, 2, 5, 5)); 
 
-        // Configura la etiqueta para el nombre
         add(new JLabel("Nombre:"));
         labNombre = new JLabel("N/A");
         add(labNombre);
-
-        // Configura la etiqueta para la calificación
+        
         add(new JLabel("Calificación:"));
         labCalificacion = new JLabel();
         add(labCalificacion);
 
-        // Configura el checkbox para indicar si ya se visitó o no el restaurante
         add(new JLabel("Visitado:"));
         chkVisitado = new JCheckBox();
-        chkVisitado.setEnabled(false); // No editable por el usuario
+        chkVisitado.setEnabled(false); 
         add(chkVisitado);
     
     }
